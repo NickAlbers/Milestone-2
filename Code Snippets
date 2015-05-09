@@ -1,0 +1,14 @@
+//	if (g_BothHigh == 1)
+//	{
+//		if ((channelA == 1) && (channelB == 0))
+//		{
+//			g_Yaw ++;
+//			g_BothHigh = 0;
+//		}
+//		if ((channelA == 1) && (channelB == 1))  // I do not know why this works
+//		{
+//			g_Yaw ++;
+//			g_BothHigh = 0;
+//		}
+//	}
+//	if (channelA && channelB) {g_BothHigh = 1;}
