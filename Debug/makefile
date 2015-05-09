@@ -135,7 +135,7 @@ all: Milestone2.out
 Milestone2.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Linker'
-	"D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/bin/armcl" -mv7M3 --code_state=16 --abi=eabi -me -g --gcc --define="ccs" --define=PART_LM3S1968 --display_error_number --diag_warning=225 --diag_wrap=off -z -m"Milestone2.map" --heap_size=0x800 --stack_size=0x800 -i"D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/lib" -i"D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include" --reread_libs --warn_sections --display_error_number --diag_wrap=off --xml_link_info="Milestone2_linkInfo.xml" --rom_model -o "Milestone2.out" $(ORDERED_OBJS)
+	"D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/bin/armcl" -mv7M3 --code_state=16 --abi=eabi -me -g --gcc --define="ccs" --define=PART_LM3S1968 --display_error_number --diag_warning=225 --diag_wrap=off -z -m"Milestone2.map" --heap_size=0x1600 --stack_size=0x1600 -i"D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/lib" -i"D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include" --reread_libs --warn_sections --display_error_number --diag_wrap=off --xml_link_info="Milestone2_linkInfo.xml" --rom_model -o "Milestone2.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
