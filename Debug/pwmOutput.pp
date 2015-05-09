@@ -12,6 +12,7 @@ pwmOutput.obj: P:/Courses/ENCE361/StellarisWare/driverlib/pin_map.h
 pwmOutput.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdio.h
 pwmOutput.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/linkage.h
 pwmOutput.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdarg.h
+pwmOutput.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdint.h
 
 ../pwmOutput.c: 
 ../pwmOutput.h: 
@@ -25,3 +26,4 @@ P:/Courses/ENCE361/StellarisWare/driverlib/pin_map.h:
 D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdio.h: 
 D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/linkage.h: 
 D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdarg.h: 
+D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdint.h: 

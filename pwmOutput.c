@@ -32,13 +32,36 @@ void Init_PWM ()
 //*****************************************************************************
 // Set the Duty Cycle of the specifed PWM
 //*****************************************************************************
-void Set_PWM(unsigned long pwm_freq, float duty)
+void Set_PWM(unsigned long ul_PWMFreq, float f_Duty)
 {
-    unsigned long clocks_per_period = SysCtlClockGet () / pwm_freq;
-    unsigned long clocks_per_pulse = clocks_per_period * (duty/100);
+    unsigned long ul_ClocksPerPeriod = SysCtlClockGet () / ul_PWMFreq;
+    unsigned long ul_ClocksPerPulse = ul_ClocksPerPeriod* (f_Duty/100);
 
-    PWMGenPeriodSet (PWM_BASE, PWM_GEN_2, clocks_per_period);
-    PWMPulseWidthSet (PWM_BASE, PWM_OUT_4, clocks_per_pulse);
+    PWMGenPeriodSet (PWM_BASE, PWM_GEN_2, ul_ClocksPerPeriod);
+    PWMPulseWidthSet (PWM_BASE, PWM_OUT_4, ul_ClocksPerPulse);
 
+}
+
+//***********************************************************
+// Calculates the Duty Cycle relative to the altitude
+//***********************************************************
+
+int16_t Calc_PWM_Duty(volatile int16_t altitude)
+{
+	// Scale the encoder value from the adc input in volts to a  value in percentage
+
+	int16_t calcDuty;
+	calcDuty = (100.00 - altitude);
+
+	//Keep Duty within pre defined minimum and maximum bounds
+	if (calcDuty > 95.00)
+	{
+		calcDuty = 95.00;
+	}
+	if (calcDuty < 5.00)
+	{
+		calcDuty = 5.00;
+	}
+	return calcDuty;
 }
 

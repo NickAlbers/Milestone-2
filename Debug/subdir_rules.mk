@@ -17,6 +17,13 @@ circBuf.obj: ../circBuf.c $(GEN_OPTS) $(GEN_HDRS)
 	@echo 'Finished building: $<'
 	@echo ' '
 
+display.obj: ../display.c $(GEN_OPTS) $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM Compiler'
+	"D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/bin/armcl" -mv7M3 --code_state=16 --abi=eabi -me --include_path="D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include" --include_path="P:/Courses/ENCE361/StellarisWare" --include_path="P:/Courses/ENCE361/StellarisWare/utils" --include_path="P:/Courses/ENCE361/StellarisWare/boards/ek-lm3s1968" -g --gcc --define="ccs" --define=PART_LM3S1968 --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="display.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
 main.obj: ../main.c $(GEN_OPTS) $(GEN_HDRS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM Compiler'

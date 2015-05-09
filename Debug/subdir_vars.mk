@@ -9,6 +9,7 @@ CMD_SRCS += \
 C_SRCS += \
 ../altitudeMonitor.c \
 ../circBuf.c \
+../display.c \
 ../main.c \
 ../pwmOutput.c \
 ../quadDecoder.c \
@@ -19,6 +20,7 @@ P:/Courses/ENCE361/StellarisWare/utils/ustdlib.c
 OBJS += \
 ./altitudeMonitor.obj \
 ./circBuf.obj \
+./display.obj \
 ./main.obj \
 ./pwmOutput.obj \
 ./quadDecoder.obj \
@@ -29,6 +31,7 @@ OBJS += \
 C_DEPS += \
 ./altitudeMonitor.pp \
 ./circBuf.pp \
+./display.pp \
 ./main.pp \
 ./pwmOutput.pp \
 ./quadDecoder.pp \
@@ -39,6 +42,7 @@ C_DEPS += \
 C_DEPS__QUOTED += \
 "altitudeMonitor.pp" \
 "circBuf.pp" \
+"display.pp" \
 "main.pp" \
 "pwmOutput.pp" \
 "quadDecoder.pp" \
@@ -49,6 +53,7 @@ C_DEPS__QUOTED += \
 OBJS__QUOTED += \
 "altitudeMonitor.obj" \
 "circBuf.obj" \
+"display.obj" \
 "main.obj" \
 "pwmOutput.obj" \
 "quadDecoder.obj" \
@@ -59,6 +64,7 @@ OBJS__QUOTED += \
 C_SRCS__QUOTED += \
 "../altitudeMonitor.c" \
 "../circBuf.c" \
+"../display.c" \
 "../main.c" \
 "../pwmOutput.c" \
 "../quadDecoder.c" \

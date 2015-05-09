@@ -18,13 +18,12 @@
 #include "driverlib/gpio.h"
 
 #include "stdio.h"
-#include "driverlib/pwm.h"
+#include "stdint.h"
 
 //Function Protypes
 void Init_PWM ();
+void Init_Pwm (unsigned long pwm_freq, float duty);
 void Set_PWM(unsigned long pwm_freq, float duty);
+int16_t Calc_PWM_Duty(volatile int16_t altitude);
 
-//Constants
-#define DEFAULT_RATE_HZ 150
-#define DEFAULT_DUTY 10
 #endif /* PWMOUTPUT_H_ */

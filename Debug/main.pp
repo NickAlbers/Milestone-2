@@ -19,14 +19,15 @@ main.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/linkage.h
 main.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdarg.h
 main.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdlib.h
 main.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdint.h
+main.obj: ../altitudeMonitor.h
+main.obj: ../altitudeMonitor.h
 main.obj: ../circBuf.h
-main.obj: ../altitudeMonitor.h
-main.obj: ../altitudeMonitor.h
 main.obj: ../pwmOutput.h
 main.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdio.h
 main.obj: ../quadDecoder.h
-main.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdio.h
+main.obj: ../display.h
 main.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdlib.h
+main.obj: D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdio.h
 main.obj: ../config.h
 
 ../main.c: 
@@ -48,12 +49,13 @@ D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/linkage.h:
 D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdarg.h: 
 D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdlib.h: 
 D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdint.h: 
+../altitudeMonitor.h: 
+../altitudeMonitor.h: 
 ../circBuf.h: 
-../altitudeMonitor.h: 
-../altitudeMonitor.h: 
 ../pwmOutput.h: 
 D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdio.h: 
 ../quadDecoder.h: 
-D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdio.h: 
+../display.h: 
 D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdlib.h: 
+D:/Programs/ccsv6/tools/compiler/ti-cgt-arm_5.2.4/include/stdio.h: 
 ../config.h: 

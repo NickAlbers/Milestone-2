@@ -10,6 +10,7 @@ ORDERED_OBJS += \
 $(GEN_CMDS__FLAG) \
 "./altitudeMonitor.obj" \
 "./circBuf.obj" \
+"./display.obj" \
 "./main.obj" \
 "./pwmOutput.obj" \
 "./quadDecoder.obj" \
@@ -148,8 +149,8 @@ Milestone2.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "altitudeMonitor.pp" "circBuf.pp" "main.pp" "pwmOutput.pp" "quadDecoder.pp" "rit128x96x4.pp" "startup_ccs.pp" "ustdlib.pp" 
-	-$(RM) "altitudeMonitor.obj" "circBuf.obj" "main.obj" "pwmOutput.obj" "quadDecoder.obj" "rit128x96x4.obj" "startup_ccs.obj" "ustdlib.obj" 
+	-$(RM) "altitudeMonitor.pp" "circBuf.pp" "display.pp" "main.pp" "pwmOutput.pp" "quadDecoder.pp" "rit128x96x4.pp" "startup_ccs.pp" "ustdlib.pp" 
+	-$(RM) "altitudeMonitor.obj" "circBuf.obj" "display.obj" "main.obj" "pwmOutput.obj" "quadDecoder.obj" "rit128x96x4.obj" "startup_ccs.obj" "ustdlib.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

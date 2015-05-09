@@ -4,7 +4,6 @@
 // Created on: May 8, 2015
 // Author: Nick
 //*****************************************************************************
-// ADC Header
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
 #include "inc/hw_ints.h"
@@ -22,29 +21,20 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "stdint.h"
-#include "circBuf.h"
 
 //Include program modules
 #include "altitudeMonitor.h"
 #include "pwmOutput.h"
 #include "quadDecoder.h"
 #include "circBuf.h"
+#include "display.h"
 
 //Include configurations settings
 #include "config.h"
 
-//Define Constants
-#define BUF_SIZE 1
-#define ADC_SAMPLE_RATE_HZ 10
-
 //Function Prototypes
 void Init_Clock (void);
-void Init_Display (void);
 void Init_Ref_Pin (void);
-void Display_Val (volatile int16_t value, char* metric, int y_Pos);
-void Init_ADC(void);
-void Altitude_Monitor_ISR(void);
-void SysTickIntHandler(void);
 
 //*****************************************************************************
 // Initialise system clock
@@ -68,30 +58,8 @@ void Init_Clock (void)
 }
 
 //*****************************************************************************
-// Initialise OLED display
-//*****************************************************************************
-void Init_Display (void)
-{
-	RIT128x96x4Init(1000000);
-}
-
-//*****************************************************************************
-// Generic display function, takes an integer value, a metric, and the
-// y position to disable the string at
-//*****************************************************************************
-void Display_Val (volatile int16_t value, char* metric, int y_Pos)
-{
-	// Generate a string with the current passed value and display on the OLED
-	// at the desired positon (X, Y, Level)
-
-	char string [30];
-	sprintf (string, "%s: %d     ", metric, value);
-	RIT128x96x4StringDraw (string, 5, y_Pos, 15);
-}
-
-//************************************************************
 // Initialisation function to provide a Vcc source on Pin 56
-//************************************************************
+//*****************************************************************************
 void Init_Ref_Pin (void)
 {
    // To set Pin 56 (PD0) as a +Vcc low current capacity source:
@@ -103,20 +71,15 @@ void Init_Ref_Pin (void)
 }
 
 //*****************************************************************************
-// Function to display the mean ADC value (10-bit value, note) and sample count
+// Generates a map to convert the voltage inputs from the ADC values to
+// percentage
 //*****************************************************************************
-void displayMeanVal(int meanVal, int count)
+
+int16_t Map_ADC(int16_t input, int16_t in_min, int16_t in_max, int16_t out_min,
+				int16_t out_max)
 {
-	char string[100];
-
-    RIT128x96x4StringDraw("ADC0 (Pin 62)", 5, 24, 15);
-    RIT128x96x4StringDraw("sampled at 10 Hz", 5, 34, 15);
-	sprintf(string, "Mean value = %d   %", meanVal & 0X03FF);
-    RIT128x96x4StringDraw(string, 5, 44, 15);
-	sprintf(string, "Count = %d %", count & 0X0FFF);
-    RIT128x96x4StringDraw(string, 5, 54, 15);
+  return (input - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-
 
 //*****************************************************************************
 // Main Function
@@ -136,6 +99,7 @@ int main (void)
 
 	int16_t PWM_Duty;
     int16_t sum;
+    int16_t avgAltVolts;
     int16_t avgAltitude;
     int16_t altitudePercentage;
     unsigned int i;
@@ -148,12 +112,17 @@ int main (void)
 		for (i = 0; i < BUF_SIZE; i++)
 		{
 			sum = sum + readCircBuf (&g_AltitudeBuff);
-
 		}
-		// Average the ADC read altitude value across BUF_SIZE counts to maintain
-		// an accurate value, and convert to a  percentage
-		avgAltitude = (sum / BUF_SIZE);
-		altitudePercentage = (avgAltitude * ALTITUDE_SCALE);
+
+		// Convert ADC read to volts, and average across BUF_SIZE counts
+		avgAltitude = sum/BUF_SIZE;
+		avgAltVolts = Map_ADC(avgAltitude,  MIN_ALT_ADC, MAX_ALT_ADC,
+											MIN_ALT_VOLTS, MAX_ALT_VOLTS);
+		// Convert ADC voltage to a percentage
+		// NOTE WELL: MAX ALT VOLTS and MIN ALT VOLTS are flipped since the ADC
+		// output is inversely proportional to distance
+		altitudePercentage = Map_ADC(avgAltVolts, MAX_ALT_VOLTS, MIN_ALT_VOLTS,
+									MIN_ALT_PERCENT, MAX_ALT_PERCENT);
 
 		// Set the duty cycle of the PWM relative to the altitude, with
 		// max = 95% and min 5%
@@ -161,13 +130,11 @@ int main (void)
 		Set_PWM(PWM_FREQ_HZ, PWM_Duty);
 
 		Display_Val (Get_Yaw(), "Yaw", 5);
-		Display_Val ((avgAltitude), "Altitude", 15);
-		Display_Val ((altitudePercentage), "Altitude %", 55);
-		Display_Val (gul_AltitudeSampCnt, "Count", 25);
-		Display_Val (PWM_FREQ_HZ, "PWM Freq", 35);
-		Display_Val (PWM_Duty, "PWM Duty", 45);
-
-//		displayMeanVal(sum / BUF_SIZE, (int) gul_AltitudeSampCnt);
+		Display_Val ((avgAltVolts), "Altitude", 15);
+		Display_Val ((altitudePercentage), "Altitude %", 25);
+		Display_Val (gul_AltitudeSampCnt, "Count", 35);
+		Display_Val (PWM_FREQ_HZ, "PWM Freq", 45);
+		Display_Val (PWM_Duty, "PWM Duty", 55);
 	}
 }
 
